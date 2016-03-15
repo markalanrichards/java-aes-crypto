@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -71,7 +72,7 @@ public class AesCbcWithIntegrity {
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String CIPHER = "AES";
     private static final String RANDOM_ALGORITHM = "SHA1PRNG";
-    private static final int AES_KEY_LENGTH_BITS = 128;
+    private static final int AES_KEY_LENGTH_BITS = 256;
     private static final int IV_LENGTH_BYTES = 16;
     private static final int PBE_ITERATION_COUNT = 10000;
     private static final int PBE_SALT_LENGTH_BITS = AES_KEY_LENGTH_BITS; // same size as key output
@@ -393,7 +394,7 @@ public class AesCbcWithIntegrity {
      * and the secret HMAC key for integrity.
      */
 
-    public static class SecretKeys {
+    public static class SecretKeys implements Serializable{
         private SecretKey confidentialityKey;
         private SecretKey integrityKey;
 
